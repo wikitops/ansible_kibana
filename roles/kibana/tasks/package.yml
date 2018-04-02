@@ -1,0 +1,44 @@
+---
+
+- name: KIBANA | Import key
+  apt_key:
+    url: "{{ kibana_apt_key }}"
+    state: present
+
+- name: KIBANA | Add repository
+  apt_repository:
+    repo: "{{ kibana_apt_url }}"
+    state: present
+
+- name: KIBANA | Install packages
+  apt:
+    name: kibana
+    update_cache: yes
+    state: present
+
+- name: KIBANA | Create directories
+  file:
+    path: "{{ item.path }}"
+    state: directory
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { path: "{{ kibana_logging_dest }}", owner: "{{ kibana_user }}", group: "{{ kibana_group }}", mode: "0755"}
+
+- name: KIBANA | Configure
+  template:
+    src: "etc/kibana/kibana.yml.j2"
+    dest: "{{ kibana_conf_dir }}/kibana.yml"
+    owner: "{{ kibana_user }}"
+    group: "{{ kibana_group }}"
+    mode: 0644
+  notify: Retart kibana
+
+- name: KIBANA | Configure log rotation
+  template:
+    src: "etc/logrotate.d/kibana.j2"
+    dest: "/etc/logrotate.d/kibana"
+    mode: 0644
+    owner: root
+    group: root

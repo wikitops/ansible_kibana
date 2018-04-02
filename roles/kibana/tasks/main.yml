@@ -1,0 +1,15 @@
+---
+
+- block:
+
+  - name: KIBANA | Deploy with Docker
+    import_tasks: dockerised.yml
+
+  when: dockerised
+
+- block:
+
+  - name: KIBANA | Deploy from packages
+    import_tasks: package.yml
+
+  when: not dockerised

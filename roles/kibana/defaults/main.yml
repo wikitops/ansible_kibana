@@ -1,0 +1,27 @@
+---
+
+# Globals
+kibana_version: 6.2.3
+kibana_default_port: 5601
+kibana_elasticsearch_url: http://elasticsearch.wikitop.io # or http://10.0.3.121:9200
+
+# With Docker
+kibana_docker_project: kibana
+kibana_docker_image: "docker.elastic.co/kibana/kibana-oss:{{ kibana_version }}"
+kibana_server_name: kibana.wikitops.io
+kibana_docker_port: 80
+
+# With packages
+kibana_major_version: "6.x"
+kibana_apt_key: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+kibana_apt_url: "deb https://artifacts.elastic.co/packages/{{ kibana_major_version }}/apt stable main"
+
+kibana_user: kibana
+kibana_group: kibana
+
+kibana_conf_dir: "/etc/kibana"
+
+kibana_server_port: 80
+kibana_server_host: "{{ inventory_hostname }}"
+kibana_logging_dest: "/var/log/kibana"
+kibana_logging_quiet: "true"

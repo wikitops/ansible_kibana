@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+{{ kibana_logging_dest }}/*.log {
+        daily
+        rotate 7
+        copytruncate
+        compress
+        delaycompress
+        missingok
+        notifempty
+}

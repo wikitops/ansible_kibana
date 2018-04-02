@@ -1,0 +1,11 @@
+[kibana01]
+10.0.3.131
+
+[kibana:children]
+kibana01
+
+[elasticsearch01]
+10.0.3.121
+
+[elasticsearch:children]
+elasticsearch01

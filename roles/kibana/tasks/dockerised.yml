@@ -1,0 +1,25 @@
+---
+
+- name: KIBANA | Install prerequisites packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - docker-compose
+
+- name: KIBANA | Deploy Docker container
+  docker_service:
+    state: present
+    pull: yes
+    recreate: always
+    project_name: "{{ kibana_docker_project }}"
+    definition:
+      version: '2'
+      services:
+        kibana:
+          image: "{{ kibana_docker_image }}"
+          environment:
+            SERVER_NAME: "{{ kibana_server_name }}"
+            ELASTICSEARCH_URL: "{{ kibana_elasticsearch_url }}"
+          ports:
+            - "{{ kibana_docker_port }}:{{ kibana_default_port }}"

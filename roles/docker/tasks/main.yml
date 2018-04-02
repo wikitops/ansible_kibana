@@ -1,0 +1,28 @@
+---
+
+- name: DOCKER | Install prerequisites packages
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+    state: present
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - software-properties-common
+
+- name: DOCKER | Add key
+  apt_key:
+    url: "{{ docker_key }}"
+    state: present
+
+- name: DOCKER | Add repository
+  apt_repository:
+    repo: "{{ docker_repo }}"
+    state: present
+
+- name: IDOCKER | Installation
+  apt:
+    name: docker-ce
+    update_cache: yes
+    state: present
+  notify: Restart Docker
