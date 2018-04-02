@@ -17,7 +17,7 @@ What things you need to run this Ansible playbook :
 vagrant box add https://app.vagrantup.com/ubuntu/boxes/xenial64
 ```
 * Choose your deployment type (Docker or package) by setting the variable dockerised to true or false
-* You must have an running Elasticsearch cluster
+* You must have a running Elasticsearch cluster
 * Before running the playbook, you must configure the variable kibana_elasticsearch_url with the right URL to one of your Elasticsearch nodes
 
 ### Usage
