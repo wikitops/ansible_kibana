@@ -1,0 +1,41 @@
+---
+
+###
+# KIBANA
+###
+
+# Version
+kibana_version: 6.4.1
+
+# Users
+kibana_user: kibana
+kibana_group: kibana
+
+# Server configuration
+kibana_server_host: "{{ inventory_hostname }}"
+kibana_server_name: "{{ ansible_hostname }}"
+
+###
+# DOCKER
+###
+
+# Network
+kibana_docker_network:
+  - name: kibana
+    state: present
+
+# Stack
+kibana_docker:
+  - name: kibana
+    image: docker.elastic.co/kibana/kibana-oss:{{ kibana_version }}
+    state: started
+    network: kibana
+    ports:
+      - 5601:5601/tcp
+
+###
+# ELASTICSEARCH
+###
+
+# URL
+kibana_elasticsearch_url: http://elasticsearch.wikitops.io # or http://127.0.0.1:9200

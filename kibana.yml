@@ -1,21 +1,11 @@
 ---
 
-# - hosts: kibana
-#   remote_user: vagrant
-#   become: yes
-#   vars:
-#     dockerised: true
-#     kibana_elasticsearch_url: http://10.0.3.121:9200
-#   roles:
-#     - docker
-#     - kibana
-
 - hosts: kibana
   remote_user: vagrant
   become: yes
   vars:
-    dockerised: false
-    kibana_elasticsearch_url: http://10.0.3.121:9200
+    kibana_on_baremetal: false
+    kibana_on_docker: true
+    kibana_on_kubernetes: false
   roles:
-    - java
     - kibana

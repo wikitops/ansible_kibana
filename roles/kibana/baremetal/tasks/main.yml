@@ -1,17 +1,15 @@
 ---
 
-- name: KIBANA | Import key
-  apt_key:
-    url: "{{ kibana_apt_key }}"
-    state: present
+- name: KIBANA | Manage Debian environment
+  import_tasks: debian.yml
+  when: ansible_os_family == 'Debian' or ansible_os_family == 'Ubuntu'
 
-- name: KIBANA | Add repository
-  apt_repository:
-    repo: "{{ kibana_apt_url }}"
-    state: present
+- name: KIBANA | Manage Redhat environment
+  import_tasks: redhat.yml
+  when: ansible_os_family == 'RedHat' or ansible_os_family == 'CentOS'
 
 - name: KIBANA | Install packages
-  apt:
+  package:
     name: kibana
     update_cache: yes
     state: present
@@ -24,12 +22,12 @@
     group: "{{ item.group }}"
     mode: "{{ item.mode }}"
   with_items:
-    - { path: "{{ kibana_logging_dest }}", owner: "{{ kibana_user }}", group: "{{ kibana_group }}", mode: "0755"}
+    - { path: "{{ kibana_log_dest }}", owner: "{{ kibana_user }}", group: "{{ kibana_group }}", mode: "0755"}
 
 - name: KIBANA | Configure
   template:
     src: "etc/kibana/kibana.yml.j2"
-    dest: "{{ kibana_conf_dir }}/kibana.yml"
+    dest: "/etc/kibana/kibana.yml"
     owner: "{{ kibana_user }}"
     group: "{{ kibana_group }}"
     mode: 0644

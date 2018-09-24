@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: "{{ item.name }}"
+  namespace: "{{ item.namespace }}"
+spec:
+  replicas: "{{ item.replicas }}"
+  selector:
+    matchLabels:
+      app: "{{ item.name }}"
+  template:
+    metadata:
+      labels:
+        app: "{{ item.name }}"
+    spec:
+      containers:
+      - image: "{{ item.image }}"
+        name: "{{ item.name }}"
+        ports: "{{ item.ports }}"
+        resources: "{{ item.resources }}"
+        volumeMounts:
+        - name: config
+          mountPath: /usr/share/kibana/kibana.yml
+          subPath: kibana.yml
+          readOnly: true
+
+      volumes:
+      - name: config
+        configMap:
+          name: "{{ item.name }}-config"
+          items:
+          - key: kibana.yml
+            path: kibana.yml

@@ -1,0 +1,36 @@
+---
+
+###
+# KUBERNETES
+###
+
+# Namespace
+kibana_namespace:
+  - kibana
+
+# Deployment
+kibana_deployment:
+  - image: docker.elastic.co/kibana/kibana-oss:{{ kibana_version }}
+    name: kibana
+    namespace: kibana
+    port: 5601
+    replicas: 1
+    resources:
+      limits:
+        memory: 2Gi
+        cpu: "200m"
+      requests:
+        memory: 2Gi
+        cpu: "200m"
+
+kibana_configmap_config:
+  - # Node Identity
+    name: kibana-config
+    namespace: kibana
+
+    # Server configuration
+    kibana_server_host: "{{ inventory_hostname }}"
+    kibana_server_name: "{{ ansible_hostname }}"
+
+    # Elasticsearch - URL
+    kibana_elasticsearch_url: http://elasticsearch.wikitops.io # or http://127.0.0.1:9200s

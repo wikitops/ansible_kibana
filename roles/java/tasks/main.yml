@@ -1,6 +1,0 @@
----
-
-- name: JAVA | Install prerequisites packages
-  apt:
-    name: "{{ java_version }}"
-    state: present

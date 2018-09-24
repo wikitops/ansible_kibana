@@ -1,0 +1,39 @@
+---
+
+###
+# kibana
+###
+
+# Version
+kibana_major_version: "6.x"
+kibana_version: "6.4.1"
+
+# Apt repository
+kibana_apt_key: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+kibana_apt_url: "deb https://artifacts.elastic.co/packages/{{ kibana_major_version }}/apt stable main"
+
+# Yum repository
+kibana_yum_key: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+kibana_yum_url: "https://artifacts.elastic.co/packages/6.x/yum"
+
+# Users
+kibana_user: kibana
+kibana_group: kibana
+
+# Logs
+kibana_log_dest: /var/log/kibana
+kibana_log_silent: false
+kibana_log_quiet: true
+kibana_log_verbose: false
+
+# Server configuration
+kibana_server_port: 5601
+kibana_server_host: "{{ inventory_hostname }}"
+kibana_server_name: "{{ ansible_hostname }}"
+
+###
+# ELASTICSEARCH
+###
+
+# URL
+kibana_elasticsearch_url: http://elasticsearch.wikitops.io # or http://127.0.0.1:9200

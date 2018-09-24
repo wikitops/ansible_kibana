@@ -1,0 +1,11 @@
+---
+
+- name: KIBANA ON DEBIAN | Import key
+  apt_key:
+    url: "{{ kibana_apt_key }}"
+    state: present
+
+- name: KIBANA ON DEBIAN | Add repository
+  apt_repository:
+    repo: "{{ kibana_apt_url }}"
+    state: present

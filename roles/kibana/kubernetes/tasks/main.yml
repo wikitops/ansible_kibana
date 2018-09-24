@@ -1,0 +1,27 @@
+---
+
+- name: KIBANA ON KUBERNETES | Create namespace
+  k8s:
+    name: "{{ item.name }}"
+    api_version: v1
+    kind: Namespace
+    state: "{{ item.state }}"
+  with_items: "{{ kibana_namespace }}"
+
+- name: KIBANA ON KUBERNETES | Manage Config Maps to configure Kibana
+  k8s:
+    state: present
+    src: "{{ lookup('template', 'configmap-config.yaml') | from_yaml }}"
+  with_items: "{{ kibana_configmap_config }}"
+
+- name: KIBANA ON KUBERNETES | Manage Deployments
+  k8s:
+    state: present
+    src: "{{ lookup('template', 'deployment.yaml') | from_yaml }}"
+  with_items: "{{ kibana_deployment }}"
+
+- name: KIBANA ON KUBERNETES | Manage Services
+  k8s:
+    state: present
+    src: "{{ lookup('template', 'service.yaml') | from_yaml }}"
+  with_items: "{{ kibana_deployment }}"

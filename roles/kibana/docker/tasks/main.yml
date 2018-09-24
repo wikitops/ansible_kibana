@@ -1,0 +1,21 @@
+---
+
+- name: KIBANA ON DOCKER | Create the network
+  docker_network:
+    name: "{{ item.name }}"
+    state: "{{ item.state }}"
+  with_items: "{{ kibana_docker_network }}"
+
+- name: KIBANA ON DOCKER | Deploy the container
+  docker_container:
+    name: "{{ item.name }}"
+    image: "{{ item.image }}"
+    state: "{{ item.state }}"
+    restart: yes
+    ports: "{{ item.ports }}"
+    env:
+      SERVER_NAME: "{{ kibana_server_name }}"
+      ELASTICSEARCH_URL: "{{ kibana_elasticsearch_url }}"
+    networks:
+      - name: "{{ item.network }}"
+  with_items: "{{ kibana_docker }}"

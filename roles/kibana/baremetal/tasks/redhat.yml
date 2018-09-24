@@ -1,0 +1,16 @@
+---
+
+- name: KIBANA ON REDHAT | Import apt key
+  rpm_key:
+    key: "{{ kibana_yum_key }}"
+    state: present
+
+- name : KIBANA ON REDHAT | Add repository with GPG Key
+  yum_repository:
+    name: "kibana-{{ kibana_major_version }}"
+    description: "Kibana repository for {{ kibana_major_version}} packages"
+    baseurl: "{{ kibana_yum_url }}"
+    gpgcheck: true
+    gpgkey: "{{ kibana_yum_key }}"
+    enabled: yes
+    state: present
