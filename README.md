@@ -26,16 +26,6 @@ A good point with Vagrant is that you can create, update and destroy all archite
 
 Be aware that you need to be in the Vagrant directory to be able to run the commands.
 
-#### Dependencies
-
-This playbook has some dependencies to other roles that must be downloaded before executing the playbook :
-
-```bash
-$ ansible-galaxy install -r requirements.yml
-```
-
-This command should download the Epel, Docker, Java, Pip roles from Github to the local role path.
-
 #### Baremetal Deployment
 
 To deploy the Kibana client on baremetal, you have to configure the variable *kibana_on_baremetal* to *true* in the file kibana.yml before running the playbook :
@@ -50,10 +40,10 @@ vars:
 [...]
 ```
 
-Once it's done, you just have to run the Ansible playbook kibana.yml with this command :
+Once it's done, you just have to provision the Vagrant instance and the Ansible playbook will automatically be called :
 
 ```bash
-$ ansible-playbook kibana.yml
+$ vagrant up
 ```
 
 If everything run has expected, you should deploy pipeline files in /opt/kibana/pipeline to manage logs.
@@ -74,10 +64,10 @@ vars:
 [...]
 ```
 
-Once it's done, you just have to run the Ansible playbook kibana.yml with this command :
+Once it's done, you just have to provision the Vagrant instance and the Ansible playbook will automatically be called :
 
 ```bash
-$ ansible-playbook kibana.yml
+$ vagrant up
 ```
 
 If everything run has expected, you should have a Docker container named kibana which search pipeline files in the host directory : /opt/kibana/pipeline
@@ -86,7 +76,7 @@ The Kibana Web interface should be accessible at : http://10.0.3.131:5601/
 
 #### Kubernetes Deployment
 
-To deploy the Kibana client on Docker, you have to configure the variable *kibana_on_kubernetes* to *true* in the file kibana.yml before running the playbook :
+To deploy the Kibana client on Kubernetes, you have to configure the variable *kibana_on_kubernetes* to *true* in the file kibana.yml before running the playbook :
 
 ```yaml
 [...]
@@ -98,10 +88,10 @@ vars:
 [...]
 ```
 
-Once it's done, you just have to run the Ansible playbook kibana.yml with this command :
+Once it's done, you just have to provision the Vagrant instance and the Ansible playbook will automatically be called :
 
 ```bash
-$ ansible-playbook kibana.yml
+$ vagrant up
 ```
 
 If everything run has expected, you should have a namespace and a pod named kibana. This pod should be configured by two config map kibana-config and kibana-pipeline.
