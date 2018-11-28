@@ -13,7 +13,7 @@ What things you need to run this Ansible playbook :
 *   [Vagrant](https://www.vagrantup.com/docs/installation/) must be installed on your computer
 *   Update the Vagrant file based on your computer (CPU, memory), if needed
 *   Update the operating system to deploy in the Vagrant file (default: Ubuntu)
-*   An Elasticsearch cluster has to be deployed and accessible to fully deployed Kibana
+*   An Elasticsearch cluster has to be deployed and accessible to fully deploy Kibana
 *   Download the Ansible requirements:
 
 ```bash
@@ -26,11 +26,7 @@ A good point with Vagrant is that you can create, update and destroy all archite
 
 Be aware that you need to be in the Vagrant directory to be able to run the commands.
 
-#### Deployment
-
-Kibana can be deployed in different platform : baremetal, docker, kubernetes.
-
-#### Baremetal Deployment
+#### Dependencies
 
 This playbook has some dependencies to other roles that must be downloaded before executing the playbook :
 
@@ -38,9 +34,23 @@ This playbook has some dependencies to other roles that must be downloaded befor
 $ ansible-galaxy install -r requirements.yml
 ```
 
-This command should download the Java roles from Ansible Galaxy to the local role path.
+This command should download the Epel, Docker, Java, Pip roles from Github to the local role path.
 
-To deploy the Kibana client, you just have to run the Ansible playbook kibana.yml with this command :
+#### Baremetal Deployment
+
+To deploy the Kibana client on baremetal, you have to configure the variable *kibana_on_baremetal* to *true* in the file kibana.yml before running the playbook :
+
+```yaml
+[...]
+vars:
+  kibana_on_baremetal: true
+  kibana_on_docker: false
+  kibana_on_kubernetes: false
+  kibana_elasticsearch_url: <CONFIGURE_IT>
+[...]
+```
+
+Once it's done, you just have to run the Ansible playbook kibana.yml with this command :
 
 ```bash
 $ ansible-playbook kibana.yml
@@ -52,14 +62,6 @@ The Kibana Web interface should be accessible at : http://10.0.3.131:5601/
 
 #### Docker Deployment
 
-This playbook has some dependencies to other roles that must be downloaded before executing the playbook :
-
-```bash
-$ ansible-galaxy install -r requirements.yml
-```
-
-This command should download the Docker and pip roles from Ansible Galaxy to the local role path.
-
 To deploy the Kibana client on Docker, you have to configure the variable *kibana_on_docker* to *true* in the file kibana.yml before running the playbook :
 
 ```yaml
@@ -68,6 +70,7 @@ vars:
   kibana_on_baremetal: false
   kibana_on_docker: true
   kibana_on_kubernetes: false
+  kibana_elasticsearch_url: <CONFIGURE_IT>
 [...]
 ```
 
@@ -91,6 +94,7 @@ vars:
   kibana_on_baremetal: false
   kibana_on_docker: false
   kibana_on_kubernetes: true
+  kibana_elasticsearch_url: <CONFIGURE_IT>
 [...]
 ```
 
