@@ -4,9 +4,13 @@
 # KUBERNETES
 ###
 
+# Version
+kibana_version: 6.5.1
+
 # Namespace
 kibana_namespace:
-  - kibana
+  - name: kibana
+    state: present
 
 # Deployment
 kibana_deployment:

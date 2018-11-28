@@ -1,6 +1,6 @@
 ---
 
-- name: KIBANA ON REDHAT | Import apt key
+- name: KIBANA ON REDHAT | Import rpm key
   rpm_key:
     key: "{{ kibana_yum_key }}"
     state: present

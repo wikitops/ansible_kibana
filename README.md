@@ -1,6 +1,6 @@
 # Ansible : Playbook Kibana
 
-The purpose of this project is to deploy a simple Kibana client on Vagrant with some default value. The deployment can be baremetal, on Docker or on Kubernetes / Openshift.
+The aim of this project is to deploy Kibana on Vagrant instances.
 
 ## Getting Started
 
@@ -12,12 +12,13 @@ What things you need to run this Ansible playbook :
 
 *   [Vagrant](https://www.vagrantup.com/docs/installation/) must be installed on your computer
 *   Update the Vagrant file based on your computer (CPU, memory), if needed
-*   You must have download the ubuntu Xenial64 vagrant box :
+*   Update the operating system to deploy in the Vagrant file (default: Ubuntu)
+*   An Elasticsearch cluster has to be deployed and accessible to fully deployed Kibana
+*   Download the Ansible requirements:
 
 ```bash
-$ vagrant box add https://app.vagrantup.com/ubuntu/boxes/xenial64
+$ ansible-galaxy install -r requirements.yml
 ```
-*   If yu want to deploy Kibana on Kubernetes, you must have an instance/cluster up and running and configure the Ansible host file
 
 ### Usage
 
@@ -25,31 +26,9 @@ A good point with Vagrant is that you can create, update and destroy all archite
 
 Be aware that you need to be in the Vagrant directory to be able to run the commands.
 
-#### Build Environment
+#### Deployment
 
-This section does not have to be played if you want to deploy Kibana on Kubernetes.
-
-Vagrant needs to init the project to run and build it :
-
-```bash
-$ vagrant up
-```
-
-After build, you can check which virtual machine Vagrant has created :
-
-```bash
-$ vagrant status
-```
-
-If all run like it is expected, you should see something like this :
-
-```bash
-$ vagrant status
-
-Current machine states:
-
-kibana01                  running (virtualbox)
-```
+Kibana can be deployed in different platform : baremetal, docker, kubernetes.
 
 #### Baremetal Deployment
 
@@ -68,6 +47,8 @@ $ ansible-playbook kibana.yml
 ```
 
 If everything run has expected, you should deploy pipeline files in /opt/kibana/pipeline to manage logs.
+
+The Kibana Web interface should be accessible at : http://10.0.3.131:5601/
 
 #### Docker Deployment
 
@@ -98,6 +79,8 @@ $ ansible-playbook kibana.yml
 
 If everything run has expected, you should have a Docker container named kibana which search pipeline files in the host directory : /opt/kibana/pipeline
 
+The Kibana Web interface should be accessible at : http://10.0.3.131:5601/
+
 #### Kubernetes Deployment
 
 To deploy the Kibana client on Docker, you have to configure the variable *kibana_on_kubernetes* to *true* in the file kibana.yml before running the playbook :
@@ -119,12 +102,42 @@ $ ansible-playbook kibana.yml
 
 If everything run has expected, you should have a namespace and a pod named kibana. This pod should be configured by two config map kibana-config and kibana-pipeline.
 
+The Kibana Web interface should be accessible at : http://10.0.3.131:5601/
+
 #### Destroy
 
-To destroy on what Vagrant has created, just run this command :
+To destroy the Vagrant resources created, just run this command :
 
 ```bash
 $ vagrant destroy
+```
+
+### How-To
+
+This section list some simple command to use and manage the playbook and the Vagrant hosts.
+
+#### Update with Ansible
+
+To update the Kibana configuration with Ansible, you just have to run the Ansible playbook kibana.yml with this command :
+
+```bash
+$ ansible-playbook kibana.yml
+```
+
+#### Update with Vagrant
+
+To update the Kibana configuration with Vagrant, you just have to run provisioning part of the Vagrant file :
+
+```bash
+$ vagrant provision
+```
+
+#### Connect to Vagrant instance
+
+To be able to connect to a Vagrant instance, you should use the CLI which is configured to automatically use the default SSH key :
+
+```bash
+$ vagrant ssh kibana01
 ```
 
 ## Author
