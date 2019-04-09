@@ -7,6 +7,6 @@
     kibana_on_baremetal: false
     kibana_on_docker: true
     kibana_on_kubernetes: false
-    kibana_elasticsearch_url: <CONFIGURE_IT>
+    kibana_elasticsearch_url: <CONFIGURE_ME>
   roles:
     - kibana

@@ -5,7 +5,7 @@
 ###
 
 # Version
-kibana_version: 6.5.1
+kibana_version: 6.7.1
 
 # Namespace
 kibana_namespace:
@@ -37,4 +37,4 @@ kibana_configmap_config:
     kibana_server_name: "{{ ansible_hostname }}"
 
     # Elasticsearch - URL
-    kibana_elasticsearch_url: http://elasticsearch.wikitops.io # or http://127.0.0.1:9200s
+    kibana_elasticsearch_url: http://elasticsearch.wikitops.io # or http://127.0.0.1:9200
