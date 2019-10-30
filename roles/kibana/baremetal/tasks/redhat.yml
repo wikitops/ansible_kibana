@@ -1,11 +1,11 @@
 ---
 
-- name: KIBANA ON REDHAT | Import rpm key
+- name: KIBANA REDHAT | Import rpm key
   rpm_key:
     key: "{{ kibana_yum_key }}"
     state: present
 
-- name : KIBANA ON REDHAT | Add repository with GPG Key
+- name : KIBANA REDHAT | Add repository with GPG Key
   yum_repository:
     name: "kibana-{{ kibana_major_version }}"
     description: "Kibana repository for {{ kibana_major_version}} packages"
@@ -13,4 +13,10 @@
     gpgcheck: true
     gpgkey: "{{ kibana_yum_key }}"
     enabled: yes
+    state: present
+
+- name: KIBANA REDHAT | Install packages
+  package:
+    name: kibana-oss
+    update_cache: yes
     state: present

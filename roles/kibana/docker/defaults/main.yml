@@ -5,7 +5,7 @@
 ###
 
 # Version
-kibana_version: 6.7.1
+kibana_version: 7.4.1
 
 # Users
 kibana_user: kibana

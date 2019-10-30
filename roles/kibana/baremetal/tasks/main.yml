@@ -8,35 +8,5 @@
   import_tasks: redhat.yml
   when: ansible_os_family == 'RedHat' or ansible_os_family == 'CentOS'
 
-- name: KIBANA | Install packages
-  package:
-    name: kibana
-    update_cache: yes
-    state: present
-
-- name: KIBANA | Create directories
-  file:
-    path: "{{ item.path }}"
-    state: directory
-    owner: "{{ item.owner }}"
-    group: "{{ item.group }}"
-    mode: "{{ item.mode }}"
-  with_items:
-    - { path: "{{ kibana_log_dest }}", owner: "{{ kibana_user }}", group: "{{ kibana_group }}", mode: "0755"}
-
-- name: KIBANA | Configure
-  template:
-    src: "etc/kibana/kibana.yml.j2"
-    dest: "/etc/kibana/kibana.yml"
-    owner: "{{ kibana_user }}"
-    group: "{{ kibana_group }}"
-    mode: 0644
-  notify: Retart kibana
-
-- name: KIBANA | Configure log rotation
-  template:
-    src: "etc/logrotate.d/kibana.j2"
-    dest: "/etc/logrotate.d/kibana"
-    mode: 0644
-    owner: root
-    group: root
+- name: KIBANA | Configuration
+  import_tasks: configure.yml

@@ -3,10 +3,10 @@
 dependencies:
 
   - role: kibana/baremetal
-    when: kibana_on_baremetal
+    when: kibana_install_type == "baremetal"
 
   - role: kibana/docker
-    when: kibana_on_docker
+    when: kibana_install_type == "docker"
 
   - role: kibana/kubernetes
-    when: kibana_on_kubernetes
+    when: kibana_install_type == "kubernetes"

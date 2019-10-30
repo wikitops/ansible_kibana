@@ -1,11 +1,17 @@
 ---
 
-- name: KIBANA ON DEBIAN | Import key
+- name: KIBANA DEBIAN | Import key
   apt_key:
     url: "{{ kibana_apt_key }}"
     state: present
 
-- name: KIBANA ON DEBIAN | Add repository
+- name: KIBANA DEBIAN | Add repository
   apt_repository:
     repo: "{{ kibana_apt_url }}"
+    state: present
+
+- name: KIBANA DEBIAN | Install packages
+  package:
+    name: kibana
+    update_cache: yes
     state: present
