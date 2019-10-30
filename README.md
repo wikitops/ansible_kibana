@@ -33,9 +33,7 @@ To deploy the Kibana client on baremetal, you have to configure the variable *ki
 ```yaml
 [...]
 vars:
-  kibana_on_baremetal: true
-  kibana_on_docker: false
-  kibana_on_kubernetes: false
+  kibana_install_type: baremetal
   kibana_elasticsearch_url: <CONFIGURE_IT>
 [...]
 ```
@@ -57,9 +55,7 @@ To deploy the Kibana client on Docker, you have to configure the variable *kiban
 ```yaml
 [...]
 vars:
-  kibana_on_baremetal: false
-  kibana_on_docker: true
-  kibana_on_kubernetes: false
+  kibana_install_type: docker
   kibana_elasticsearch_url: <CONFIGURE_IT>
 [...]
 ```
@@ -81,9 +77,7 @@ To deploy the Kibana client on Kubernetes, you have to configure the variable *k
 ```yaml
 [...]
 vars:
-  kibana_on_baremetal: false
-  kibana_on_docker: false
-  kibana_on_kubernetes: true
+  kibana_install_type: kubernetes
   kibana_elasticsearch_url: <CONFIGURE_IT>
 [...]
 ```
