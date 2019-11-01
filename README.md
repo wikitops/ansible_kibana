@@ -28,7 +28,7 @@ Be aware that you need to be in the Vagrant directory to be able to run the comm
 
 #### Baremetal Deployment
 
-To deploy the Kibana client on baremetal, you have to configure the variable *kibana_on_baremetal* to *true* in the file kibana.yml before running the playbook :
+To deploy the Kibana client on baremetal, you have to configure the variable *kibana_install_type* to *baremetal* in the file kibana.yml before running the playbook :
 
 ```yaml
 [...]
@@ -44,13 +44,11 @@ Once it's done, you just have to provision the Vagrant instance and the Ansible 
 $ vagrant up
 ```
 
-If everything run has expected, you should deploy pipeline files in /opt/kibana/pipeline to manage logs.
-
 The Kibana Web interface should be accessible at : http://10.0.3.131:5601/
 
 #### Docker Deployment
 
-To deploy the Kibana client on Docker, you have to configure the variable *kibana_on_docker* to *true* in the file kibana.yml before running the playbook :
+To deploy the Kibana client on Docker, you have to configure the variable *kibana_install_type* to *docker* in the file kibana.yml before running the playbook :
 
 ```yaml
 [...]
@@ -66,13 +64,13 @@ Once it's done, you just have to provision the Vagrant instance and the Ansible 
 $ vagrant up
 ```
 
-If everything run has expected, you should have a Docker container named kibana which search pipeline files in the host directory : /opt/kibana/pipeline
+If everything run has expected, you should have a Docker container named kibana.
 
 The Kibana Web interface should be accessible at : http://10.0.3.131:5601/
 
 #### Kubernetes Deployment
 
-To deploy the Kibana client on Kubernetes, you have to configure the variable *kibana_on_kubernetes* to *true* in the file kibana.yml before running the playbook :
+To deploy the Kibana client on Kubernetes, you have to configure the variable *kibana_install_type* to *kubernetes* in the file kibana.yml before running the playbook :
 
 ```yaml
 [...]
