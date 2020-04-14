@@ -12,9 +12,9 @@ SUPPORTED_OS = {
 $os                     = "ubuntu"
 $num_instances          = 1
 $instance_name_prefix   = "kibana"
-$vm_memory              = 1024
+$vm_memory              = 4096
 $vm_cpus                = 1
-$subnet                 = "10.0.3.13" # For 10.0.3.13X
+$subnet                 = "10.0.0.1" # For 10.0.0.1X
 $box                    = SUPPORTED_OS[$os][:box]
 
 # Ansible provisioner
