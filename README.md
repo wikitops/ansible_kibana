@@ -44,7 +44,7 @@ Once it's done, you just have to provision the Vagrant instance and the Ansible 
 $ vagrant up
 ```
 
-The Kibana Web interface should be accessible at : http://10.0.3.131:5601/
+The Kibana Web interface should be accessible at : http://10.0.0.11:5601/
 
 #### Docker Deployment
 
@@ -66,7 +66,7 @@ $ vagrant up
 
 If everything run has expected, you should have a Docker container named kibana.
 
-The Kibana Web interface should be accessible at : http://10.0.3.131:5601/
+The Kibana Web interface should be accessible at : http://10.0.0.11:5601/
 
 #### Kubernetes Deployment
 
@@ -88,7 +88,7 @@ $ vagrant up
 
 If everything run has expected, you should have a namespace and a pod named kibana. This pod should be configured by two config map kibana-config and kibana-pipeline.
 
-The Kibana Web interface should be accessible at : http://10.0.3.131:5601/
+The Kibana Web interface should be accessible at : http://10.0.0.11:5601/
 
 #### Destroy
 
