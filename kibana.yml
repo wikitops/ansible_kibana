@@ -5,6 +5,6 @@
   become: yes
   vars:
     kibana_install_type: baremetal # docker / kubernetes
-    kibana_elasticsearch_url: <CONFIGURE_ME>
+    kibana_elasticsearch_hosts: ["<CONFIGURE_ME>"]
   roles:
     - kibana

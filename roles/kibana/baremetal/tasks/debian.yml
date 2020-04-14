@@ -1,5 +1,11 @@
 ---
 
+- name: KIBANA DEBIAN | Set OSS variables
+  set_fact:
+    kibana_package_name: "{{ kibana_oss_package_name }}"
+    kibana_apt_url: "{{ kibana_oss_apt_url }}"
+  when: kibana_oss_version
+
 - name: KIBANA DEBIAN | Import key
   apt_key:
     url: "{{ kibana_apt_key }}"
@@ -12,6 +18,6 @@
 
 - name: KIBANA DEBIAN | Install packages
   package:
-    name: kibana
+    name: "{{ kibana_package_name }}"
     update_cache: yes
     state: present

@@ -5,7 +5,7 @@
 ###
 
 # Version
-kibana_version: 7.4.1
+kibana_version: 7.6.2
 
 # Users
 kibana_user: kibana
@@ -38,4 +38,4 @@ kibana_docker:
 ###
 
 # URL
-kibana_elasticsearch_url: http://elasticsearch.wikitops.io # or http://127.0.0.1:9200
+kibana_elasticsearch_hosts: http://elasticsearch.wikitops.io # or http://127.0.0.1:9200

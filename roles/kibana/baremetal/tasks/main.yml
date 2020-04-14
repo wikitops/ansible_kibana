@@ -1,12 +1,10 @@
 ---
 
-- name: KIBANA | Manage Debian environment
-  import_tasks: debian.yml
-  when: ansible_os_family == 'Debian' or ansible_os_family == 'Ubuntu'
+- name: KIBANA | Import environment variables
+  include_vars: "{{ ansible_os_family | lower }}.yml"
 
-- name: KIBANA | Manage Redhat environment
-  import_tasks: redhat.yml
-  when: ansible_os_family == 'RedHat' or ansible_os_family == 'CentOS'
+- name: KIBANA | Manage environment tasks
+  include_tasks: "{{ ansible_os_family | lower }}.yml"
 
 - name: KIBANA | Configuration
   import_tasks: configure.yml

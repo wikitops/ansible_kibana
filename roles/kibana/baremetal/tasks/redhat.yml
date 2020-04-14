@@ -1,5 +1,11 @@
 ---
 
+- name: KIBANA REDHAT | Set OSS variables
+  set_fact:
+    kibana_package_name: "{{ kibana_oss_package_name }}"
+    kibana_apt_url: "{{ kibana_oss_yum_url }}"
+  when: kibana_oss_version
+
 - name: KIBANA REDHAT | Import rpm key
   rpm_key:
     key: "{{ kibana_yum_key }}"
@@ -8,7 +14,7 @@
 - name : KIBANA REDHAT | Add repository with GPG Key
   yum_repository:
     name: "kibana-{{ kibana_major_version }}"
-    description: "Kibana repository for {{ kibana_major_version}} packages"
+    description: "Kibana repository for {{ kibana_major_version }} packages"
     baseurl: "{{ kibana_yum_url }}"
     gpgcheck: true
     gpgkey: "{{ kibana_yum_key }}"
@@ -17,6 +23,6 @@
 
 - name: KIBANA REDHAT | Install packages
   package:
-    name: kibana-oss
+    name: "{{ kibana_package_name }}"
     update_cache: yes
     state: present
