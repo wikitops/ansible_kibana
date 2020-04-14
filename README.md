@@ -34,7 +34,7 @@ To deploy the Kibana client on baremetal, you have to configure the variable *ki
 [...]
 vars:
   kibana_install_type: baremetal
-  kibana_elasticsearch_url: <CONFIGURE_IT>
+  kibana_elasticsearch_hosts: ["<CONFIGURE_ME>"]
 [...]
 ```
 
@@ -54,7 +54,7 @@ To deploy the Kibana client on Docker, you have to configure the variable *kiban
 [...]
 vars:
   kibana_install_type: docker
-  kibana_elasticsearch_url: <CONFIGURE_IT>
+  kibana_elasticsearch_hosts: ["<CONFIGURE_ME>"]
 [...]
 ```
 
@@ -76,7 +76,7 @@ To deploy the Kibana client on Kubernetes, you have to configure the variable *k
 [...]
 vars:
   kibana_install_type: kubernetes
-  kibana_elasticsearch_url: <CONFIGURE_IT>
+  kibana_elasticsearch_hosts: ["<CONFIGURE_ME>"]
 [...]
 ```
 
